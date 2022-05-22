@@ -11,8 +11,14 @@
     
     {% if request.user.is_authenticated %}
     <p>Logged in: {{request.user}}</p>
+    <p><a href="{% url 'logout_view' %}">Log Out</a></p>
+
+    <p><a href="{% url 'scope_departments' %}">Scopes tenant list</a></p>
+    <p><a href="{% url 'multitenant_departments' %}">Multitenant tenant list</a></p>
+
     {% else %}
     <p>Anonymous user</p>
+    <p><a href="{% url 'login' %}">Login</a></p>
     {% endif %}
         
     {% block content %}       
