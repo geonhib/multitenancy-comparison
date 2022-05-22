@@ -1,0 +1,16 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h4>All tenants</h4>
+
+{% for tenant in tenants %}
+    <div>
+        {{tenant.name}}
+    </div>
+{% endfor %} 
+
+{% endblock content %}
+    
+
+    

@@ -1,0 +1,22 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>{{tenant|title}}</h3>
+
+
+{% for department in departments %}
+
+    <div>
+        Tenant: {{department.site|title}} <br><br>
+        Dept name: {{department.name}} <br><br>
+        <hr>
+    </div>
+{% endfor %}
+
+Num of depts:  {{ dept_num }}
+
+{% endblock content %}
+    
+
