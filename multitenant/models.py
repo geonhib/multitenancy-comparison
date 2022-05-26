@@ -9,7 +9,7 @@ from django_multitenant.models import *
 
 TENANT_STATUS = (
     ('active', 'active'),
-    ('inaactive', 'inactive'),
+    ('inactive', 'inactive'),
 )
 class School(TenantModel):
     tenant_id = 'id'
@@ -22,20 +22,21 @@ class School(TenantModel):
 
 
 class Department(TenantModel):
-    tenant_id = 'school_id'
     school = models.ForeignKey(School, on_delete=models.CASCADE)
+    tenant_id = 'school_id'
     name = models.CharField(max_length=80)
 
     def __str__(self):
         return f"{self.name} - {self.school}"
 
-    class Meta:
+    class Meta(object):
         unique_together = ['id', 'school', ]
+        
 
 
 class Program(TenantModel):
-    tenant_id = 'school_id'
     school = models.ForeignKey(School, on_delete=models.CASCADE)
+    tenant_id = 'school_id'
     name = models.CharField(max_length=80)
     department = TenantForeignKey(Department, on_delete=models.CASCADE)
     activity = models.CharField(max_length=200)

@@ -24,28 +24,30 @@ class ProgramList(ListView):
 
 
 def departments(request):
-    print("yooooo")
+    departments = ""
     if request.user.is_superuser:
         print("super")
         departments = Department.objects.all()
     else:
         print("staff")
-        school = School.objects.get(user=request.user)
-        set_current_tenant(school)
-        departments = Department.objects.all()
+        try:
+
+            school = School.objects.get(user=request.user)
+        except:
+            print("not there")
+
+            set_current_tenant(school)
+            departments = Department.objects.all()
 
     school=School.objects.get(user=request.user)
 
-    if school:
-        print("yes")
-    else:
-        print("no")
 
-    print(f"My school is: {school}")
-    dept_num = departments.count()
+
+    # print(f"My school is: {s.chool}")
+    # dept_num = departments.count()
     context = {
         "departments": departments,
-        "dept_num": dept_num,
+        # "dept_num": dept_num,
         "tenant": school,
     }
     return render(request, 'departments.html', context)

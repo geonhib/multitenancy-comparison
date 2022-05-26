@@ -18,6 +18,7 @@ def sites(request):
     return render(request, 'schools.html', context)
 
 
+@scopes_disabled()
 def departments(request):
     if request.user.is_superuser:
         with scope(site=None):
